@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRƯỜNG ĐẠI HỌC THĂNG LONG</title>
+    <link rel="stylesheet" th:href="@{/style/dangkihoc.css}">
+    <link rel="shortcut icon" href="http://cdn.onlinewebfonts.com/svg/download_153418.png" type="image/x-icon" />
+    <link href="https://fonts.googleapis.com/css2?family=Cabin&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="shortcut icon"
+        href="https://th.bing.com/th/id/OIP.7ygufrwv0ZC8FpCGIlV5RAHaHa?pid=ImgDet&w=221&h=221&c=7&dpr=1.25"
+        type="image/x-icon" />
+    
+    <style>
+        .entry {
+            display: flex;
+        }
+
+        .update {
+            display: none;
+        }
+
+        img {
+            height: 200px;
+            width: 200px;
+            border: 1px solid #ddd;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            object-fit: cover;
+        }
+
+        .update {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 999999;
+            background-color: rgba(0, 0, 0, 0.75);
+            display: none;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        .table {
+            justify-content: center;
+            margin: 200px auto;
+            margin-top: 120px;
+            width: 30%;
+            height: 530px;
+            line-height: 1;
+
+
+            background-color: white;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            border-radius: 15px;
+            background-color: #f2f2f2;
+
+        }
+
+        input[type=text],
+        select {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+
+        }
+
+        input[type=submit] {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type=submit]:hover {
+            background-color: #45a049;
+        }
+
+
+
+        h4 {
+            padding-left: 20px;
+            padding-top: 10px;
+        }
+
+        label {
+            font-size: 14px;
+        }
+        #div {
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            padding: 20px;
+          }
+    </style>
+</head>
+
+<body>
+    <div id="head">
+        <div class="center">
+            <div class="logo"></div>
+            <div class="right">
+                <b>Chào
+                    <span style="color:red" th:text="${user.username}"></span>
+                </b>
+                |
+                <a href="#">Đổi mật khẩu</a>
+                |
+                <a href="#">Đăng xuất</a>
+                <br>
+                Tình Trạng :
+                <strong>
+                    <span style="color:brown" th:text="${student.trangThai}"></span>
+                </strong>
+
+
+            </div>
+            <div class="maquee">
+                <a href="#" style="color:red">Để nhận hỗ trợ từ hệ thống, đăng kí địa chỉ email, số điện thoại!</a>
+            </div>
+            <div id="menu">
+                <ul>
+                    <li>
+                        <a href="#" class="avtice">Trang chủ đăng kí học</a>
+                    </li>
+                    <li>
+                        <a href="#">Trang chủ nhà trường</a>
+                    </li>
+                    <li>
+                        <a href="#">Trang chủ đào tạo</a>
+                    </li>
+                    <li>
+                        <a href="#" class="msg">Có 0 tin báo mới</a>
+                    </li>
+                </ul>
+
+            </div>
+
+        </div>
+        <div id="page">
+            <div id="left">
+                <ul>
+                    <li>
+                        <h3 class="title">Toàn trường</h3>
+                        <ul>
+                            <li>
+                                <a href="#">Thời khóa biểu toàn trường</a>
+                            </li>
+                            <li>
+                                <a href="#">Lịch thi lại toàn trường</a>
+                            </li>
+                            <li>
+                                <a href="#">Chương trình đào tạo</a>
+                            </li>
+                        </ul>
+
+                    </li>
+                    <li>
+                        <h3 class="title">Góc sinh viên</h3>
+                        <ul class="sub-menu" style="display:block">
+                            <li><a href="#">Thông tin cá nhân</a></li>
+                            <li><a href="#">Đăng kí học </a></li>
+                            <li><a href="#">Đăng kí thi lại</a></li>
+                            <li><a href="#">Thời khóa biểu</a></li>
+                            <li><a href="#">Phiếu báo thu tiền</a></li>
+                            <li><a href="#">Bảng điểm</a></li>
+                            <li><a href="#">Lịch thi chính thức</a></li>
+                            <li><a href="#">Lịch thi dự kiến</a></li>
+                            <li><a href="#">Phiếu bảo điểm</a></li>
+                            <li><a href="#">Lịch kí sổ gốc</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div id="right">
+                <div class="title">
+                    <a href="#">Thông tin sinh viên </a>
+                </div>
+                <div class="entry">
+                    <table width="100%">
+                        <tr>
+                            <td width="30%">Mã sinh viên :</td>
+                            <td th:text="${student.id}"></td>
+                        </tr>
+                        <tr>
+                            <td width>Họ tên :</td>
+                            <td th:text="${user.name}"></td>
+                        </tr>
+                        <tr>
+                            <td width>Giới tính :</td>
+                            <td th:text="${user.sex}"></td>
+                        </tr>
+                        <tr>
+                            <td width>Ngày sinh :</td>
+                            <td th:text="${user.birthday}"></td>
+                        </tr>
+                        <tr>
+                            <td width>Giáo viên chủ nghiệm :</td>
+                            <td>Đậu Hải Phong</td>
+                        </tr>
+                        <tr>
+                            <td width>Điện thoại :</td>
+                            <td th:text="${user.phoneNumber}"></td>
+                        </tr>
+                        <tr>
+                            <td width>Email :</td>
+                            <td th:text="${user.email}"></td>
+                        </tr>
+                        <tr>
+                            <td width>Chỗ ở :</td>
+                            <td th:text="${user.address}"></td>
+                        </tr>
+                        <tr>
+                            <td><button class="btn">Cập nhật thông tin</button></td>
+                        </tr>
+
+                    </table>
+                    <div class="avatar">
+                        <tr>
+                            <td> <img th:src="${user.avatar}" /></td>
+                        </tr>
+                    </div>
+
+
+
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+    <div id="footer">
+        <p>Địa chỉ: Đường Nghiêm Xuân Yêm - Đại Kim - Hoàng Mai - Hà Nội</p>
+        Điện thoại hỗ trợ kỹ thuật:(04) 355 92 678 website
+        <a href="http://www.thanglong.edu.vn">http://www.thanglong.edu.vn</a>
+        mail:
+        <a href="">p.cntt@thanglong.edu.vn.</a>
+    </div>
+
+    </div>
+
+    <div class="update">
+        <div class="table">
+            <form class="mx-1 mx-md-4 " th:action="@{/registrationUser}" th:object="${user}" method="post">
+                <h4 style="font-size:18px">Cập nhật thông tin sinh viên <a href="" style="color:red ; margin-left:140px;font-size:25px">x</a></h4>
+                <hr>
+                <div id="div">
+                    <form action="/action_page.php" class="form">
+                        <label for="fname">First Name</label>
+                        <input type="text"   th:field="*{username}">
+
+                        <label for="address">Address</label>
+                        <input type="text"  th:field="*{address}">
+
+                        <label for="address">Phone Number</label>
+                        <input type="text"  th:field="*{phoneNumber}">
+
+                        <label for="address">Email</label>
+                        <input type="text" th:field="*{email}">
+
+                        <label for="address">Birthday</label>
+                        <input type="text"   th:field="*{birthday}">
+
+                        <label for="country">Giới tính</label>
+                        <select id="country" name="country">
+                            <option value="nam">Nam</option>
+                            <option value="nu">Nu</option>
+                        </select>
+
+                        <input type="submit" value="Submit">
+
+
+                    </form>
+                </div>
+        </div>
+
+
+</body>
+<script>
+    const buttonUpdate = document.querySelector('.btn')
+    const Update = document.querySelector('.update')
+    const Table = document.querySelector('.table')
+
+    if (buttonUpdate) {
+        buttonUpdate.addEventListener('click', function (e) {
+            Update.style.display = 'block'
+            console.log("haha")
+        })
+    }
+    
+    
+
+
+
+
+</script>
+
+</html>
